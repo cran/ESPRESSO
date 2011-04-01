@@ -1,5 +1,5 @@
 get.observed.data <-
-function(is.interaction=0, true.data, geno.error=c(0.05,0.05), is.add=c(0,0), MAF=c(0.1,0.1), env.expo=c(0,0), env.prev=c(0.1,0.1), env.error=c(0.15,0.15), env.error.stdev=c(0.18,0.18), env.var=c(0.04,0.04))
+function(is.interaction=0, true.data, geno.error=c(0.05,0.05), is.add=c(0,0), MAF=c(0.1,0.1), env.expo=c(0,0), env.prev=c(0.1,0.1), env.error=c(0.15,0.15), reliability.env = c(0.8,0.8))
 {
     sim.df <- true.data
     geno.error.1.0 <- geno.error[1]
@@ -14,10 +14,8 @@ function(is.interaction=0, true.data, geno.error=c(0.05,0.05), is.add=c(0,0), MA
     env2.prev <- env.prev[2]
     env.error.1.0 <- env.error[1]
     env.error.0.1 <- env.error[2]
-    env1.error.stdev <- env.error.stdev[1]
-    env2.error.stdev <- env.error.stdev[2]
-    env1.variance <- env.var[1]
-    env2.variance <- env.var[2]
+    reliability.env1 <- reliability.env[1]
+    reliability.env2 <- reliability.env[2]
 
 
 	   # GENE1
@@ -42,11 +40,11 @@ function(is.interaction=0, true.data, geno.error=c(0.05,0.05), is.add=c(0,0), MA
 	   allele.B2.true <- observed.geno2.data$allele.B.orig
 
 	   # FIRST ENVIRONMENT 
-	   env1.data <- make.obs.env(sim.df$env1.U, env1.expo, env1.prev, env.error, env1.error.stdev, env1.variance)
+	   env1.data <- make.obs.env(sim.df$env1.U, env1.expo, env1.prev, env.error, reliability.env1)
 	   sim.df$env1.U <- env1.data$environ.new
 
 	   # SECOND ENVIRONMENT
-	   env2.data <- make.obs.env(sim.df$env2.U, env2.expo, env2.prev, env.error,  env2.error.stdev, env2.variance)
+	   env2.data <- make.obs.env(sim.df$env2.U, env2.expo, env2.prev, env.error,  reliability.env2)
 	   sim.df$env2.U <- env2.data$environ.new
 
 	   # UPDATE THE INTERACTION DATA USING DETERMINANTS WITH ERROR (OBSERVED DATA)

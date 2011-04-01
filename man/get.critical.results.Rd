@@ -11,7 +11,7 @@
 \usage{
 get.critical.results(scenario, is.interaction = 0, pheno.model = 0, 
 is.add = c(0, 0), env.expo = c(0, 0), sample.sizes.required, empirical.power, 
-model.power)
+model.power, mean.betas)
 }
 
 \arguments{
@@ -23,6 +23,7 @@ model.power)
   \item{sample.sizes.required}{Number of cases and controls or number of subjects required to achieve the desired power}
   \item{empirical.power}{Estimated empirical power}
   \item{model.power}{Calculated theoretical power}
+  \item{mean.betas}{Mean beta value of each of the determinants}
 }
 
 \value{
@@ -36,7 +37,7 @@ model.power)
   \item{numsubjects}{Number of subjects required to achieve the desired power under each model}
   \item{powers1}{Estimated empirical power under each model}
   \item{powers1}{Power achieved under each model with the specified sample size}
-
+  \item{est.ORs}{Estimated odds-ratios - due to shrinkage toward the null resulting from misclassification}
 }
 
 \author{Amadou Gaye}
@@ -67,9 +68,12 @@ empirical.power <- c(0.2,0.3,0.56,0.6,0.15)
 # power values calculated from the set number of subjects
 model.power <- c(0.18,0.27,0.58,0.59,0.17)
 
+# mean beta values for each determinant
+mean.betas <- c(0.18,0.18,0.10,0.10,0.15)
+
 # return critical results and print a summary
 res <- get.critical.results(j, is.interaction, pheno.model, is.add, env.expo, 
-sample.sizes.required, empirical.power, model.power)
+sample.sizes.required, empirical.power, model.power, mean.betas)
 }
 
 \keyword{utilities}

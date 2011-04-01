@@ -47,7 +47,7 @@ skewness = c(0, 0), int.efkt = 0.5, reliability.pheno=0.9)
 \examples{
 
 # number of subjects
-num.subjects <- 1000
+num.subjects <- 500
 
 # main effect model
 is.interaction <-  0 

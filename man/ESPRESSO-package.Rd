@@ -90,8 +90,7 @@ for(j in start.at.scenario : stop.at.scenario)
 
    # environmental determinants parameters
    env.expo <- c(s.parameters$model.env1[j],s.parameters$model.env2[j])
-   env.var <- c(s.parameters$env1.variance[j],s.parameters$env2.variance[j])
-   env.error.stdev <- c(s.parameters$env1.error.stdev,s.parameters$env2.error.stdev)       
+   reliability.env <- c(s.parameters$reliability.env1[j],s.parameters$reliability.env2[j])       
    env.prev <- c(s.parameters$env1.prev[j],s.parameters$env2.prev[j])
    env.mean.lowlm <- c(s.parameters$env1.mean.lowlm,s.parameters$env2.mean.lowlm) 
    env.stdev.uplm <- c(s.parameters$env1.stdev.uplm,s.parameters$env2.stdev.uplm)          
@@ -154,7 +153,7 @@ for(j in start.at.scenario : stop.at.scenario)
 
       # add appropriate errors to produce observed genotypes 
       observed.data <- get.observed.data(is.interaction, sim.matrix, geno.error, 
-      is.add, MAF, env.expo, env.prev, env.error, env.error.stdev, env.var)
+      is.add, MAF, env.expo, env.prev, env.error, reliability.env)
       sim.df <- observed.data$sim.df
 
       # data analysis
@@ -215,6 +214,8 @@ for(j in start.at.scenario : stop.at.scenario)
       mean.se.int<-round(sqrt(mean(se.int.results^2)),3)
       mean.model.z.int <- mean.beta.int/mean.se.int
    }
+   mean.betas <- c(mean.beta.geno1, mean.beta.geno2, mean.beta.env1, mean.beta.env2, mean.beta.int)
+   
 
    # calculate the sample size required under each model
    sample.sizes.required <- samplsize.calc(numcases,numcontrols, num.subjects, 
@@ -233,6 +234,6 @@ for(j in start.at.scenario : stop.at.scenario)
 
    # return critical results and print a summary
    res <- get.critical.results(j, is.interaction, pheno.model, is.add, env.expo, 
-   sample.sizes.required, empirical.power, model.power)
+   sample.sizes.required, empirical.power, model.power, mean.betas)
 }
 }

@@ -46,7 +46,7 @@ pheno.model <-  0
 is.interaction <-  0 # main effect model
 
 # number of runs 
-numsims <- 100
+numsims <- 10
 
 # empty vectors to store the results of each run
 # gene 
@@ -90,7 +90,7 @@ for(s in 1:numsims)
 
    # add appropriate errors to produce observed genotypes 
    observed.data <- get.observed.data(0, sim.matrix,c(0.95,0.95), 
-   c(0,0),c(0.1,0.1),c(0,0),c(0.1,0.1),c(0.85,0.85),c(0.18,0.18),c(0.04,0.04))
+   c(0,0),c(0.1,0.1),c(0,0),c(0.1,0.1),c(0.85,0.85),c(0.8,0.8))
    sim.df <- observed.data$sim.df
 
    # data analysis

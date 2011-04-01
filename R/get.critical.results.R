@@ -1,5 +1,5 @@
 get.critical.results <-
-function(scenario, is.interaction=0, pheno.model=0, is.add=c(0,0), env.expo=c(0,0), sample.sizes.required, empirical.power, model.power)
+function(scenario, is.interaction=0, pheno.model=0, is.add=c(0,0), env.expo=c(0,0), sample.sizes.required, empirical.power, model.power, mean.betas)
 {
   is.add.geno1 <- is.add[1]
   is.add.geno2 <- is.add[2]
@@ -65,6 +65,14 @@ function(scenario, is.interaction=0, pheno.model=0, is.add=c(0,0), env.expo=c(0,
 		}
 
   if(pheno.model==0){
+     # estimated ORs
+     est.or.geno1 <- exp(mean.betas[1])
+     est.or.geno2 <- exp(mean.betas[2])
+     est.or.env1 <- exp(mean.betas[3])
+     est.or.env2 <- exp(mean.betas[4])
+     est.or.I <- exp(mean.betas[5])
+     est.ORs <- c(est.or.geno1, est.or.geno2, est.or.env1, est.or.env2, est.or.I)
+
 					cat("\n---- SUMMARY OF SCENARIO",scenario,"----\n")
 					cat("\nModels\n")
 					cat("------\n")
@@ -106,10 +114,28 @@ function(scenario, is.interaction=0, pheno.model=0, is.add=c(0,0), env.expo=c(0,
 					cat(" Env1:",powers2[3],"; ")
 					cat(" Env2:",powers2[4],"; ")
 					cat(" Interaction:",powers2[5])
+
+					cat("\n\nEstimated ORs\n")
+					cat("-----------\n")
+					cat(" Gen1:",est.or.geno1,"; ")
+					cat(" Gen2:",est.or.geno2,"; ")
+					cat(" Env1:",est.or.env1,"; ")
+					cat(" Env2:",est.or.env2,"; ")
+					cat(" Interaction:",est.or.I)
+
 					cat("\n\n---- END OF SUMMARY ----\n")
 
-		  crit.res <- matrix(c(models,numcases,numcontrols,powers1,powers2),5,5)
+		  crit.res <- matrix(c(models,numcases,numcontrols,powers1,powers2,est.ORs),5,6)
+
   }else{
+     # estimated ORs
+     est.or.geno1 <- 'NA'
+     est.or.geno2 <- 'NA'
+     est.or.env1 <- 'NA'
+     est.or.env2 <- 'NA'
+     est.or.I <- 'NA'
+     est.ORs <- c(est.or.geno1, est.or.geno2, est.or.env1, est.or.env2, est.or.I)
+
 					cat("\n---- SUMMARY OF SCENARIO",scenario,"----\n")
 					cat("\nModels\n")
 					cat("------\n")
@@ -143,13 +169,20 @@ function(scenario, is.interaction=0, pheno.model=0, is.add=c(0,0), env.expo=c(0,
 					cat(" Env1:",powers2[3],"; ")
 					cat(" Env2:",powers2[4],"; ")
 					cat(" Interaction:",powers2[5])
+
+					cat("\n\nEstimated ORs\n")
+					cat("-----------\n")
+					cat(" Gen1:",est.or.geno1,"; ")
+					cat(" Gen2:",est.or.geno2,"; ")
+					cat(" Env1:",est.or.env1,"; ")
+					cat(" Env2:",est.or.env2,"; ")
+					cat(" Interaction:",est.or.I)
+
 					cat("\n\n---- END OF SUMMARY ----\n")
 
-		   crit.res <- matrix(c(models,numsubjects,powers1,powers2),5,4)
+		   crit.res <- matrix(c(models,numsubjects,powers1,powers2,est.ORs),5,5)
   }
 
-
 		return(crit.res)
-
 }
 

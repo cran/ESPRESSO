@@ -17,10 +17,8 @@
     \item{\code{scenario.id}}{Scenario number}
     \item{\code{model.env1}}{Models of the first environmental exposure: 0 for binary and 1 quantitative-normal and 2 for quantitative-uniform}
     \item{\code{model.env2}}{Models of the first environmental exposure: 0 for binary and 1 quantitative-normal and 2 for quantitative-uniform}
-    \item{\code{env1.variance}}{Variance of the observed measures for environment 1}
-    \item{\code{env2.variance}}{Variance of the observed measures for environment 2}
-    \item{\code{env1.error.stdev}}{Standard deviation of the error in the observed measures of environment 1}
-    \item{\code{env2.error.stdev}}{Standard deviation of the error in the observed measures of environment 2}
+    \item{\code{reliability.env1}}{reliability of the assessment of quantitative exposure 1}
+    \item{\code{reliability.env2}}{reliability of the assessment of quantitative exposure 2}
     \item{\code{env1.prev}}{Prevalence of environment 1}
     \item{\code{env2.prev}}{Prevalence of environment 2}
     \item{\code{env1.mean.lowlm}}{Mean measure for environment 1 under quantitative-normal model and lower limit under quantitative-uniform model}

@@ -9,8 +9,7 @@
 \usage{
 get.observed.data(is.interaction = 0, true.data, geno.error = c(0.05, 0.05), 
 is.add = c(0, 0), MAF = c(0.1, 0.1), env.expo = c(0, 0), env.prev = c(0.1, 0.1), 
-env.error = c(0.15, 0.15), env.error.stdev = c(0.18, 0.18), 
-env.var = c(0.04, 0.04))
+env.error = c(0.15, 0.15), reliability.env=c(0.8,0.8))
 }
 
 \arguments{
@@ -22,8 +21,7 @@ env.var = c(0.04, 0.04))
   \item{env.expo}{Model of the exposure: binary=1, quantitative-normal=1 or quantitative-uniform=2}
   \item{env.prev}{Prevalence of the two environmental exposures}
   \item{env.error}{Misclassification rates in environmental exposures assessment: \code{1-sensitivity} and \code{1-specificity}}
-  \item{env.error.stdev}{Standard deviation of the error in the observed environmental data}
-  \item{env.var}{Variance of the observed environmental data}
+  \item{reliability.env}{Reliability of the assessment of quantitative exposures}
 }
 
 \value{A matrix containing 11 variables}
@@ -38,7 +36,7 @@ data(init.data)
 
 # adds some error to the 'true' exposure data and generate 'observed' data
 obs.data <- get.observed.data(0, init.data, c(0.05, 0.05), c(0, 0), c(0.1, 0.1), 
-c(0, 0), c(0.1, 0.1), c(0.15, 0.15), c(0.18, 0.18), c(0.04, 0.04))
+c(0, 0), c(0.1, 0.1), c(0.15, 0.15), c(0.8, 0.8))
 
 }
 

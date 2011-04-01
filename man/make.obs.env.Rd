@@ -10,7 +10,7 @@
 
 \usage{
 make.obs.env(env.data, env.expo = 0, env.prev = 0.1, env.error = c(0.15, 0.15), 
-stdev.error = 0.18, env.obs.var = 0.04)
+reliability.env = 0.8)
 }
 
 \arguments{
@@ -18,8 +18,7 @@ stdev.error = 0.18, env.obs.var = 0.04)
   \item{env.expo}{ Model of the exposure: binary=1, quantitative-normal=1 or quantitative-uniform=2 }
   \item{env.prev}{ Prevalence of the environmental determinant }
   \item{env.error}{ Misclassification rates: \code{1-sensitivity} and \code{1-specificity} }
-  \item{stdev.error}{ Standard deviation of the error in the observed data }
-  \item{env.obs.var}{ Variance of the observed data }
+  \item{reliability.env}{ reliability of the assessment of quantitative exposure }
 }
 
 \value{

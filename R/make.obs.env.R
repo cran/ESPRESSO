@@ -1,10 +1,9 @@
 make.obs.env <-
-function(env.data, env.expo=0, env.prev=0.1, env.error=c(0.15,0.15), stdev.error=0.18, env.obs.var=0.04)
+function(env.data, env.expo=0, env.prev=0.1, env.error=c(0.15,0.15), reliability.env=0.8)
 { 
    environ.orig <- env.data
    misclass.rate.1.to.0 <- env.error[1]
    misclass.rate.0.to.1 <- env.error[2]
-   env.variance <- env.obs.var
    numsubs <- length(environ.orig)
 
    if(env.expo == 0)
@@ -22,13 +21,16 @@ function(env.data, env.expo=0, env.prev=0.1, env.error=c(0.15,0.15), stdev.error
      environ.new <- environ - mean.env
 
    }else{
-     if(env.expo==1){ # QUANTITATIVE (VARIANCE OF THE ERROR: TAKES INTO ACCOUNT THE STANDARDIZATION OF THE SIMULATED DATA)
-        env.expo.error <- rnorm(numsubs, 0, stdev.error*(1/sqrt(env.variance)))
+     if(env.expo==1){ 
+        var.error <- (1^2/reliability.env)-(1^2) # standardized SD (SD = 1)
+        # ADD ERROR TO ORIGINAL ENVIRONMENTAL EXPOSURE TO GENERATE OBSERVED DATA
+        environ.n <- rnorm(numsubs, environ.orig, sqrt(var.error))
      }
      if(env.expo==2){ # UNIFORM
         env.expo.error <- rnorm(numsubs, 0, sd(environ.orig))
+        environ.n <- env.data + env.expo.error
      }
-     environ.new <- env.data + env.expo.error
+     environ.new <- environ.n
    }
 
    # RETURNED BY THE FUNCTION

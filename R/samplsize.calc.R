@@ -60,6 +60,7 @@ function(numcases=2000, numcontrols=8000, num.subjects=500, pheno.model=0, is.in
    }
 
    if(pheno.model==0){
+      # under binary outcome misclassification shrinks ORs toward the null, get estimated ORs
       return(list(numcases.required.geno1=a, numcontrols.required.geno1=b, numcases.required.geno2=c, numcontrols.required.geno2=d, 
       numcases.required.env1=e, numcontrols.required.env1=f, numcases.required.env2=g, numcontrols.required.env2=h, numcases.required.int=i,
       numcontrols.required.int=j))

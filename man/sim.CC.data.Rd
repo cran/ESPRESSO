@@ -62,7 +62,7 @@ is.interaction <-  0
 
 # generate cases and controls untill the set number of cases, 
 # controls and sample size is achieved 
-sim.matrix <- sim.CC.data(20000,numcases,numcontrols,20000000,is.interaction,0.1,
+sim.matrix <- sim.CC.data(10000,numcases,numcontrols,20000000,is.interaction,0.1,
 c(0.1,0.1),c(0,0),0.7,0,cov.mat.req=NULL, FALSE,c(1.5,1.5),c(0,0),c(3.3,3.3),c(1,1), 
 c(0.1,0.1),c(1.5,1.5),c(0,0),1.8,12.36,c(0,0))
 
